@@ -4,19 +4,27 @@ import { Observable } from 'rxjs';
 import { Person, Persons } from './person';
 import { environment } from 'src/environments/environment';
 import { RestResponse } from './rest-response';
+import { RelationshipWithDetails, RelationshipWithDetailsResp } from './relationship-with-details';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonService {
-  private allPersonsEndPoint = environment.serviceEndpoint +"persons/";
-  
 
-  constructor(private http: HttpClient) {}
+  private allPersonsEndPoint = environment.serviceEndpoint + "persons/";
+  private relationsEndpoint = environment.serviceEndpoint + "relationshipWithDetailses/search/find?personId=";
 
-    getAllPersons(): Observable<RestResponse<Persons>> {
-      return this.http.get<RestResponse<Persons>>(this.allPersonsEndPoint);
-    }
+  constructor(private http: HttpClient) { }
 
-   
+  getAllPersons(): Observable<RestResponse<Persons>> {
+    return this.http.get<RestResponse<Persons>>(this.allPersonsEndPoint);
+  }
+  addPerson(person: Person) {
+    return this.http.post(this.allPersonsEndPoint, person);
+  }
+
+  getRelations(person: Person) {
+    return this.http.get<RestResponse<RelationshipWithDetailsResp>>(this.relationsEndpoint + person.id);
+  }
+
 }
