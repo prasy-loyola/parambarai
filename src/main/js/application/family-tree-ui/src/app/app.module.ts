@@ -11,13 +11,17 @@ import { HttpClientModule } from '@angular/common/http';
 import { PersonFormComponent } from './person-form/person-form.component'; 
 import { ButtonsModule, BsDropdownModule } from 'ngx-bootstrap';
 import { RelationshipFormComponent } from './relationship-form/relationship-form.component';
+import { FindRelationshipComponent } from './find-relationship/find-relationship.component';
+import { PersonCardComponent } from './person-card/person-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PersonViewerComponent,
     PersonFormComponent,
-    RelationshipFormComponent
+    RelationshipFormComponent,
+    FindRelationshipComponent,
+    PersonCardComponent
   ],
   imports: [
     ButtonsModule.forRoot(),

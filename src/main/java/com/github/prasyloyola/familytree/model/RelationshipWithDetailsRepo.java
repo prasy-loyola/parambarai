@@ -11,5 +11,8 @@ import java.util.List;
 public interface RelationshipWithDetailsRepo extends CrudRepository<RelationshipWithDetails,Integer> {
 
     @Query("SELECT r FROM RelationshipWithDetails r WHERE r.p1_id = :personId or r.p2_id = :personId")
-    public List<RelationshipWithDetails> find(@Param("personId") Integer personId);
+    public List<RelationshipWithDetails> allrelations(@Param("personId") Integer personId);
+
+    @Query("SELECT r FROM RelationshipWithDetails r WHERE (r.p1_id = :person2Id and r.p2_id = :person1Id) or (r.p1_id = :person1Id and r.p2_id = :person2Id) ")
+    public RelationshipWithDetails relationshipBetweenTwo(@Param("person1Id") Integer person1Id,@Param("person2Id") Integer person2Id);
 }

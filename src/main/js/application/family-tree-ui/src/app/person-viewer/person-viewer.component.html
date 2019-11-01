@@ -1,40 +1,12 @@
 <div class="fluid-container ml-3">
-
-
   <div class="card-columns">
-    <div class="card" *ngFor="let person of parentPersons">
-      <!-- <img class="card-img-top" src="holder.js/100x180/" alt=""> -->
-      <div class="card-body">
-        <h4 class="card-title">{{person.name}}</h4>
-        <span class="badge badge-pill badge-info">{{person.id}}</span>
-        <span class="badge badge-pill badge-success" [ngClass]="{'badge-danger': person.gender.toUpperCase() === 'MALE'}">{{person.relationship}}</span>
-        <p class="card-text">{{person.stories}}</p>
-        <button type="button" class="btn btn-primary" (click)="this.showRelations(person)">Show Relations</button>
-      </div>
-    </div>
+    <app-person-card [person]="person" [viewerComponent]="this" *ngFor="let person of parentPersons"></app-person-card>
   </div>
   <div class="card-columns ml-3">
-    <div class="card" *ngFor="let person of sameLevelPersons">
-      <!-- <img class="card-img-top" src="holder.js/100x180/" alt=""> -->
-      <div class="card-body">
-        <h4 class="card-title">{{person.name}}</h4>
-        <span class="badge badge-pill badge-info">{{person.id}}</span>
-        <span class="badge badge-pill badge-success" [ngClass]="{'badge-danger': person.gender.toUpperCase() === 'MALE'}">{{person.relationship}}</span>
-        <p class="card-text">{{person.stories}}</p>
-        <button type="button" class="btn btn-primary" (click)="this.showRelations(person)">Show Relations</button>
-      </div>
-    </div>
+    <app-person-card [person]="person" [viewerComponent]="this" *ngFor="let person of sameLevelPersons">
+    </app-person-card>
   </div>
   <div class="card-columns ml-5">
-    <div class="card" *ngFor="let person of childPersons">
-      <!-- <img class="card-img-top" src="holder.js/100x180/" alt=""> -->
-      <div class="card-body">
-        <h4 class="card-title">{{person.name}}</h4>
-        <span class="badge badge-pill badge-info">{{person.id}}</span>
-        <span class="badge badge-pill badge-success" [ngClass]="{'badge-danger': person.gender.toUpperCase() === 'MALE'}">{{person.relationship}}</span>
-        <p class="card-text">{{person.stories}}</p>
-        <button type="button" class="btn btn-primary" (click)="this.showRelations(person)">Show Relations</button>
-      </div>
-    </div>
+    <app-person-card [person]="person" [viewerComponent]="this" *ngFor="let person of childPersons"></app-person-card>
   </div>
 </div>

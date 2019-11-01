@@ -12,7 +12,7 @@ import { RelationshipWithDetails, RelationshipWithDetailsResp } from './relation
 export class PersonService {
 
   private allPersonsEndPoint = environment.serviceEndpoint + "persons/";
-  private relationsEndpoint = environment.serviceEndpoint + "relationshipWithDetailses/search/find?personId=";
+  private relationsEndpoint = environment.serviceEndpoint + "relationshipWithDetailses/search/allrelations?personId=";
 
   constructor(private http: HttpClient) { }
 
