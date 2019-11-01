@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PersonService } from '../person-service.service';
 import { Person } from '../person';
 
+
 @Component({
   selector: 'app-person-viewer',
   templateUrl: './person-viewer.component.html',
@@ -12,9 +13,15 @@ export class PersonViewerComponent implements OnInit {
   constructor(private personService: PersonService) { }
 
   persons: Person[];
+  sameLevelPersons: Person[];
+  parentPersons: Person[];
+  childPersons: Person[];
 
   ngOnInit() {
     this.loadAllPersons();
+    this.sameLevelPersons = [];
+    this.parentPersons = [];
+    this.childPersons = [];
   }
 
   loadAllPersons(): void {
@@ -22,9 +29,11 @@ export class PersonViewerComponent implements OnInit {
       .getAllPersons()
       .subscribe(persons1 => {
 
-
-        this.persons = persons1._embedded.persons;
-
+        persons1._embedded.persons.forEach(
+          (p) => {
+            this.sameLevelPersons.push(p);
+          }
+        );
       }
       );
   }
@@ -32,9 +41,14 @@ export class PersonViewerComponent implements OnInit {
 
   showRelations(person: Person) {
     var persons: Person[] = [];
-    person.relationship=null;
+    this.sameLevelPersons = [];
+    this.parentPersons = [];
+    this.childPersons = [];
+
+    person.relationship = null;
+    person.order=null;
     persons.push(person);
-    
+
     this.personService.getRelations(person)
       .subscribe(relationshipDetailses => {
 
@@ -47,33 +61,92 @@ export class PersonViewerComponent implements OnInit {
               otherPerson.id = s.p2_id;
               otherPerson.name = s.p2_name;
               otherPerson.stories = s.p2_stories;
-              otherPerson.relationship= this.getInverseRelationship(s.relationship);
+              var relationshipResult = this.getInverseRelationship(s.relationship, s.p2_gender);
+              otherPerson.relationship = relationshipResult.showName;
+              otherPerson.order = relationshipResult["order"];
             } else {
               otherPerson.gender = s.p1_gender;
               otherPerson.id = s.p1_id;
               otherPerson.name = s.p1_name;
               otherPerson.stories = s.p1_stories;
-              otherPerson.relationship = (s.relationship || "" ).toUpperCase();
+              var relationshipResult = this.getGenderBasedName((s.relationship || ""), s.p1_gender);
+              otherPerson.relationship = relationshipResult.showName;
+              otherPerson.order = relationshipResult["order"];
+
             }
 
             persons.push(otherPerson);
 
           }
         );
-        this.persons = persons;
+
+        persons.forEach((p) => {
+          switch (p.order) {
+            case 1:
+              this.parentPersons.push(p);
+              break;
+            case -1:
+              this.childPersons.push(p);
+              break;
+
+            default:
+              this.sameLevelPersons.push(p);
+              break;
+          }
+        })
+
       });
 
   }
 
 
-  getInverseRelationship(relationship: String) {
+  getGenderBasedName(relationship: string, gender: string) {
+
+    var genderName = {
+      "MALE": {
+        "PARENT": "FATHER",
+        "CHILD": "SON",
+        "SPOUSE": "HUSBAND"
+      },
+      "FEMALE": {
+        "PARENT": "MOTHER",
+        "CHILD": "DAUGHTER",
+        "SPOUSE": "WIFE"
+      }
+    }
+
+
+
+    var result = { "showName": genderName[gender.toUpperCase()][relationship.toUpperCase()] };
+
     switch (relationship.toUpperCase()) {
       case "CHILD":
-        return "PARENT";
+        result["order"] = -1;
+        break;
       case "PARENT":
-        return "CHILD";
+        result["order"] = 1;
+        break;
+
+      default:
+        result["order"] = 0;
+        break;
+
+    }
+
+    return result;
+
+  }
+
+  getInverseRelationship(relationship: string, gender: string) {
+
+
+    switch (relationship.toUpperCase()) {
+      case "CHILD":
+        return this.getGenderBasedName("PARENT", gender);
+      case "PARENT":
+        return this.getGenderBasedName("CHILD", gender);
       case "SPOUSE":
-        return "SPOUSE";
+        return this.getGenderBasedName("SPOUSE", gender);
     }
   }
 

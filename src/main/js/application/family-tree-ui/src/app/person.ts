@@ -1,9 +1,10 @@
 export class Person {
-    name: String;
-    gender: String;
-    stories: String;
+    name: string;
+    gender: string;
+    stories: string;
     id: number;
-    relationship: String;
+    relationship: string;
+    order: number;
 }
 
 export class Persons {

@@ -1,14 +1,14 @@
 export class RelationshipWithDetails {
     id: number;
-    relationship: String;
-    p1_name: String;
-    p1_gender: String;
+    relationship: string;
+    p1_name: string;
+    p1_gender: string;
     p1_id: number;
-    p1_stories: String;
-    p2_name: String;
-    p2_gender: String;
+    p1_stories: string;
+    p2_name: string;
+    p2_gender: string;
     p2_id: number;
-    p2_stories: String;
+    p2_stories: string;
 
 }
 

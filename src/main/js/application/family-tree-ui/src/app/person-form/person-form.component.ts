@@ -26,6 +26,7 @@ export class PersonFormComponent implements OnInit {
     this.personService.addPerson(this.person)
     .subscribe(response => console.log(response));
     ;
+    this.ngOnInit();
   }
 
 }

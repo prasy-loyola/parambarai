@@ -12,12 +12,18 @@ export class RelationshipFormComponent implements OnInit {
   relationship : Relation;
   constructor(private relationshipService : RelationshipService) { }
 
+
+  
+
   ngOnInit() {
     this.relationship= new Relation();
+    this.relationship.relationship = "PARENT";
   }
 
 
   addRelationship(){
     this.relationshipService.addRelationship(this.relationship).subscribe(s=> console.log(s));
+    this.ngOnInit();
   }
+
 }

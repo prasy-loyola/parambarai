@@ -13,12 +13,15 @@
 
     </div>
 
-    <div class="form-group">
-        <label for="relationship">Relationship</label>
-        <input type="text" class="form-control" name="relationship" id="relationship" aria-describedby="relationship"
-            placeholder="Relationship" [(ngModel)]="relationship.relationship">
+<div class="form-group">
+  <label for="relationship">Relationship of Person1 to Person2</label>
+  <select class="form-control" name="relationship" id="relationship"  [(ngModel)]="relationship.relationship">
+    <option>PARENT</option>
+    <option>CHILD</option>
+    <option>SPOUSE</option>
+  </select>
+</div>
 
-    </div>
     <button type="button" class="btn btn-primary" (click)="addRelationship()">Add Relationship</button>
 
 
