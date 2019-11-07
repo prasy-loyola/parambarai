@@ -1,6 +1,6 @@
 <div class="fluid-container ml-3">
   <div class="card-columns">
-    <app-person-card [person]="person" [viewerComponent]="this" *ngFor="let person of parentPersons"></app-person-card>
+    <app-person-card [person]="person" [viewerComponent]="this" *ngFor="let person of parentPersons" ></app-person-card>
   </div>
   <div class="card-columns ml-3">
     <app-person-card [person]="person" [viewerComponent]="this" *ngFor="let person of sameLevelPersons">

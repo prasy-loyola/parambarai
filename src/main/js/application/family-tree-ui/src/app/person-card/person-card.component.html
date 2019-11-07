@@ -1,10 +1,33 @@
-<div class="card" >
+<div class="card">
     <div class="card-body">
         <h4 class="card-title">{{person.name}}</h4>
         <span class="badge badge-pill badge-info">{{person.id}}</span>
         <span class="badge badge-pill badge-success"
             [ngClass]="{'badge-danger': person.gender.toUpperCase() === 'MALE'}">{{person.relationship}}</span>
         <p class="card-text">{{person.stories}}</p>
-        <button type="button" class="btn btn-primary" (click)="this.showRelations(person)">Show Relations</button>
+        <!-- <button type="button" class="btn btn-primary" (click)="this.showRelations(person)">Show Relations</button> -->
+        <div class="col modal-body" style="z-index: 100;">
+            <div ngbDropdown class="" >
+                <button class="btn btn-outline-secondary" id="dropdownForm1" ngbDropdownToggle>Actions</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                    <app-relationship-form [person1]="person.id"></app-relationship-form>
+                    <div class="dropdown-divider"></div>
+                    <button ngbDropdownItem (click)="this.showRelations(person)">Show Relations</button>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
+
+<!-- 
+<div class="card circleFemale" [ngClass]="{'circleMale': person.gender.toUpperCase() === 'MALE'}" (click)="this.showRelations(person)" >
+    <div class="card-body">
+        <h6 class="card-title">{{person.name}}</h6>
+        <span class="badge badge-pill badge-info">{{person.id}}</span>
+        <span class="badge badge-pill badge-success"
+            [ngClass]="{'badge-danger': person.gender.toUpperCase() === 'MALE'}">{{person.relationship}}</span>
+         <p class="card-text">{{person.stories}}</p> 
+        <button type="button" class="btn btn-primary" (click)="this.showRelations(person)">Show Relations</button> 
+    </div>
+</div> -->

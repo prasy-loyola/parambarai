@@ -1,24 +1,25 @@
 <form class="col-md-4">
-<div class="form-group">
-  <label for="name">Name</label>
-  <input type="text" name="name" id="name" class="form-control" placeholder="Name" aria-describedby="name" [(ngModel)]="this.person.name"/>
-  
-</div>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" name="name" id="name" class="form-control" placeholder="Name" aria-describedby="name"
+      [(ngModel)]="this.person.name" />
 
-<div class="form-group">
-  <label for="gender">Gender</label>
-  <select class="form-control" name="gender" id="gender" [(ngModel)]="this.person.gender">
-    <option>Male</option>
-    <option>Female</option>
-    <option>Others</option>
-  </select>
-</div>
+  </div>
 
-<div class="form-group">
-  <label for="stories">Stories</label>
-  <textarea class="form-control" name="stories" id="stories" rows="10" [(ngModel)]="this.person.stories"></textarea>
-</div>
-<button type="button" class="btn btn-primary" (click)="this.addPerson()">Add Person</button>
+  <div class="form-group">
+    <label for="gender">Gender</label>
+    <select class="form-control" name="gender" id="gender" [(ngModel)]="this.person.gender">
+      <option>Male</option>
+      <option>Female</option>
+      <option>Others</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="stories">Stories</label>
+    <textarea class="form-control" name="stories" id="stories" rows="10" [(ngModel)]="this.person.stories"></textarea>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="this.addPerson()">Add Person</button>
 
 
 </form>

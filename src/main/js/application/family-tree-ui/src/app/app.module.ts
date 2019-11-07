@@ -13,6 +13,7 @@ import { ButtonsModule, BsDropdownModule } from 'ngx-bootstrap';
 import { RelationshipFormComponent } from './relationship-form/relationship-form.component';
 import { FindRelationshipComponent } from './find-relationship/find-relationship.component';
 import { PersonCardComponent } from './person-card/person-card.component';
+import { NgbDropdown, NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { PersonCardComponent } from './person-card/person-card.component';
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgbDropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]

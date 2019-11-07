@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Relation } from '../relation';
 import { RelationshipService } from '../relationship-service.service';
+import { Person } from '../person';
 
 @Component({
   selector: 'app-relationship-form',
@@ -9,7 +10,10 @@ import { RelationshipService } from '../relationship-service.service';
 })
 export class RelationshipFormComponent implements OnInit {
 
+  
   relationship : Relation;
+  @Input()
+  person1: number;
   constructor(private relationshipService : RelationshipService) { }
 
 
@@ -17,6 +21,7 @@ export class RelationshipFormComponent implements OnInit {
 
   ngOnInit() {
     this.relationship= new Relation();
+    this.relationship.person1=this.person1;
     this.relationship.relationship = "PARENT";
   }
 

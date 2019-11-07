@@ -13,3 +13,6 @@
 
 <button type="button" class="btn btn-primary" (click)="this.findRelationship()">Find Relation</button>
 </form>
+<div class="col-md-4">
+<app-person-card [person]="person" *ngFor="let person of linkPersons"></app-person-card>
+</div>
